@@ -1,11 +1,10 @@
-#!/usr/bin/env runhaskell
+module Filter where
 
 import Text.Pandoc.JSON
 import Text.Pandoc.Definition
 import System.Process
 
-main = toJSONFilter runcmd
-
+filterMain = toJSONFilter runcmd
 
 runcmd :: Block -> IO Block
 runcmd cb@(CodeBlock (id, classes, namevals) contents)
@@ -14,3 +13,4 @@ runcmd cb@(CodeBlock (id, classes, namevals) contents)
   | classes == ["run", "node"]  =
     return . CodeBlock ("", [], []) =<< (readProcess "node" [ "-p", contents ] [])
   | otherwise = return cb
+runcmd x = return x
