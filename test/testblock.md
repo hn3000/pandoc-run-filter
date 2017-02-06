@@ -1,7 +1,7 @@
-```{.run .node run=node}
+```{run=nodep}
 3+5
 ```
 
-```{print something}
-3+5
+```{run=nodee}
+console.log(3+5);
 ```

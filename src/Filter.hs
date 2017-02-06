@@ -35,6 +35,8 @@ runcommand :: String -> String -> IO String
 runcommand kind script
   | kind == "bash" = (readProcess "bash" [ "-c", script ] [])
   | kind == "sh" = (readProcess "sh" [ "-c", script ] [])
+  | kind == "nodep" = (readProcess "node" [ "-p", script ] [])
+  | kind == "nodee" = (readProcess "node" [ "-e", script ] [])
   | kind == "node" = (readProcess "node" [ "-p", script ] [])
   | otherwise = return script
 
