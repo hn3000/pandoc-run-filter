@@ -18,7 +18,6 @@ hasAttr [] _ = False
 hasAttr list (a,b)
   | Just b <- lookup a list = True
   | otherwise = False
---hasAttr (v:rest) vv = v == vv || hasAttr rest v
 
 newblock :: Attr -> String -> Block
 newblock (id, classes, namevals) contents
@@ -42,23 +41,11 @@ runcommand kind script
 runcodeblock :: Block -> IO Block
 runcodeblock cb@(CodeBlock attr@(id, classes, namevals) contents)
   | Just kind <- lookup "run" namevals = return . newblock attr =<< runcommand kind contents
-  | classes == ["run","bash"]  =
-    return . newblock attr =<< (readProcess "bash" [ "-c", contents ] [])
-  | classes == ["run","sh"]  =
-    return . newblock attr =<< (readProcess "sh" [ "-c", contents ] [])
-  | classes == ["run", "node"]  =
-    return . newblock attr =<< (readProcess "node" [ "-p", contents ] [])
   | otherwise = return cb
 runcodeblock x = return x
 
 runcode :: Inline -> IO Inline
 runcode cb@(Code attr@(id, classes, namevals) contents)
   | Just kind <- lookup "run" namevals = return . newinline attr =<< runcommand kind contents
-  | classes == ["run","bash"]  =
-    return . newinline attr =<< (readProcess "bash" [ "-c", contents ] [])
-  | classes == ["run","sh"]  =
-    return . newinline attr =<< (readProcess "sh" [ "-c", contents ] [])
-  | classes == ["run", "node"]  =
-    return . newinline attr =<< (readProcess "node" [ "-p", contents ] [])
   | otherwise = return cb
 runcode x = return x
