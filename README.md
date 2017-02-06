@@ -102,7 +102,7 @@ to compile and install the filter.
 
 ## Caveats
 
-Although having executable code inside markdown is very convenient for me, it's also a security risk. At least it's no [surprise], that it's turing-complete, because it's intentional and not an [accident] ...
+Although having executable code inside markdown is very convenient for me, it's also a security risk. At least it's no [surprise], that it's turing-complete, because it's intentional and not an [accident] ... not sure, what the [langsec] people would have to say about it. Nothing good, probably.
 
 So, before you run some else's document through this filter, you might want to review the code that it includes.
 
@@ -119,3 +119,4 @@ This also shows that [pandoc is a virus].
 [surprise]: https://www.gwern.net/Turing-complete
 [pandoc is a virus]: http://www.johnmacfarlane.net/BayHac2014/#/i-created-a-virus
 [pandoc]: http://pandoc.org
+[langsec]: http://www.cs.dartmouth.edu/~sergey/langsec/occupy/
